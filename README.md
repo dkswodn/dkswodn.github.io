@@ -2,5 +2,4 @@
 20211446 안재우
 
 [**homework2-1**](https://dkswodn.github.io/homework2-1.html)
-
-[**homework2-2**](https://dkswodn.github.io/homework2-2.html)
+  [**homework2-2**](https://dkswodn.github.io/homework2-2.html)
