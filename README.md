@@ -10,3 +10,5 @@
 [**homework2-4**](https://dkswodn.github.io/homework2-4.html)
 
 [**homework3-1**](https://dkswodn.github.io/homework3-1.jpg)
+
+[**homework3-2**](https://dkswodn.github.io/homework3-2.jpg)
