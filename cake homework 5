@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<p>Size Of the Cake</p>
+
+<select id="size" onchange="myFunction1()">
+  <option value="6">6"</option>
+  <option value="8">8"</option>
+  <option value="10">10"</option>
+  <option value="12">12"</option>
+</select>
+
+<p>Filling</p>
+
+<select id="filling" onchange="myFunction2()">
+    <option value="None">Select Filling</option>
+    <option value="Lemon">Lemon($5)</option>
+    <option value="Custard">Custard($5)</option>
+    <option value="Fudge">Fudge($7)</option>
+    <option value="Mocha">Mocha($8)</option>
+    <option value="Raspberry">Raspberry($10)</option>
+    <option value="Pineapple">Pineapple($5)</option>
+    <option value="Dobash">Dobash($9)</option>
+    <option value="Mint">Mint($5)</option>
+    <option value="Cherry">Cherry($5)</option>
+    <option value="Apricot">Apricot($8)</option>
+    <option value="Buttercream">Buttercream($7)</option>
+    <option value="Chocolate Mousse">Chocolate Mousse($12)</option>
+</select>
+
+<p>
+    <label for='includecandles' class="inlinelabel">Include Candles($5)</label>
+    <input type="checkbox" id="includecandles" name='includecandles' onclick="calculateTotal()" />
+</p>
+
+<p>
+    <label for='include inscription' class="inlinelabel"
+
+</p>
+
+
+<p id="demo1"></p>
+<p id="demo2"></p>
+
+<script>
+
+</script>
+
+</body>
+</html>
+
