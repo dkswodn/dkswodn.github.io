@@ -1,0 +1,91 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<style>
+    body {
+        margin: 0px;
+        padding: 0px;
+    }
+</style>
+</head>
+<body>
+    <canvas id="myCanvas" width="500" height="500" style="border:1px solid #000000;"></canvas>
+    <script>
+
+    var canvas = document.getElementById('myCanvas');
+    var context = canvas.getContext('2d');
+    var lasttime;    
+
+    var myRectangle = {
+        x: 450,
+        y: 250,
+        width: 25,
+        height: 0,
+        borderWidth: 3
+    };
+
+    var runAnimation = {
+        value: false
+    };
+
+    window.requestAnimFrame = (function(callback) {
+        return window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.oRequestAnimationFrame || window.msRequestAnimationFrame ||
+        function(callback) {
+            window.setTimeout(callback, 1000 / 60);
+        };
+    })();
+
+    function drawRect(myRectangle, context) {
+        context.beginPath();
+        context.arc(myRectangle.x, myRectangle.y, myRectangle.width, 0, 2 * Math.PI);
+        context.fillStyle = '#8ED6FF';
+        context.fill();
+        context.lineWidth = myRectangle.borderWidth;
+        context.strokeStyle = 'black';
+        context.moveTo(250,250);
+        context.lineTo(myRectangle.x,myRectangle.y);
+        context.strokestyle = "red";
+        context.moveTo(0,0);
+        context.lineTo(myRectangle.x,myRectangle.y);
+        context.lineTo(500,0);
+        context.moveTo(0,500);
+        context.lineTo(myRectangle.x,myRectangle.y);
+        context.lineTo(500,500);
+        context.stroke();
+    }
+
+    function animate(myRectangle, runAnimation, canvas, context) {
+        if(runAnimation.value) {
+            // update
+            var time = (new Date()).getTime();
+            var timeDiff = time - lasttime;
+            var linearDistEachFrame = 1 * timeDiff / 1000;
+            var theta = linearDistEachFrame/100;
+            myRectangle.height += theta;
+            myRectangle.x = 250+200*Math.cos(myRectangle.height);
+            myRectangle.y = 250+200*Math.sin(myRectangle.height);
+            lsattime = time;
+            
+            context.clearRect(0, 0, canvas.width, canvas.height);
+            drawRect(myRectangle, context);
+
+            requestAnimFrame(function() {
+                animate(myRectangle, runAnimation, canvas, context);
+            });
+        }
+    }
+
+    // add click listener to canvas
+    document.getElementById('myCanvas').addEventListener('click', function() {
+        runAnimation.value = !runAnimation.value;
+        if(runAnimation.value) {
+            lasttime = (new Date()).getTime();
+            animate(myRectangle, runAnimation, canvas, context);
+        }
+    });
+
+    drawRect(myRectangle, context);
+    </script>
+</body>
+</html>
