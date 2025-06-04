@@ -1,52 +1,109 @@
 <!DOCTYPE html>
 <html>
+<head>
+    <title>케이크 주문</title>
+    <style>
+        #totalPrice {
+            font-weight: bold;
+            margin-top: 10px;
+        }
+    </style>
+</head>
 <body>
 
-<p>Size Of the Cake</p>
+<h2>케이크 주문 양식</h2>
 
-<select id="size" onchange="myFunction1()">
-  <option value="6">6"</option>
-  <option value="8">8"</option>
-  <option value="10">10"</option>
-  <option value="12">12"</option>
-</select>
+<form id="cakeform">
+    <p><strong>케이크 사이즈:</strong></p>
+    <select id="size" name="selectedcake" onchange="calculateTotal()">
+        <option value="Round6">6인치</option>
+        <option value="Round8">8인치</option>
+        <option value="Round10">10인치</option>
+        <option value="Round12">12인치</option>
+    </select>
 
-<p>Filling</p>
+    <p><strong>필링 선택:</strong></p>
+    <select id="filling" name="filling" onchange="calculateTotal()">
+        <option value="None">필링 선택</option>
+        <option value="Lemon">레몬 ($5)</option>
+        <option value="Custard">커스터드 ($5)</option>
+        <option value="Fudge">퍼지 ($7)</option>
+        <option value="Mocha">모카 ($8)</option>
+        <option value="Raspberry">라즈베리 ($10)</option>
+        <option value="Pineapple">파인애플 ($5)</option>
+        <option value="Dobash">도바시 ($9)</option>
+        <option value="Mint">민트 ($5)</option>
+        <option value="Cherry">체리 ($5)</option>
+        <option value="Apricot">살구 ($8)</option>
+        <option value="Buttercream">버터크림 ($7)</option>
+        <option value="Chocolate Mousse">초콜릿 무스 ($12)</option>
+    </select>
 
-<select id="filling" onchange="myFunction2()">
-    <option value="None">Select Filling</option>
-    <option value="Lemon">Lemon($5)</option>
-    <option value="Custard">Custard($5)</option>
-    <option value="Fudge">Fudge($7)</option>
-    <option value="Mocha">Mocha($8)</option>
-    <option value="Raspberry">Raspberry($10)</option>
-    <option value="Pineapple">Pineapple($5)</option>
-    <option value="Dobash">Dobash($9)</option>
-    <option value="Mint">Mint($5)</option>
-    <option value="Cherry">Cherry($5)</option>
-    <option value="Apricot">Apricot($8)</option>
-    <option value="Buttercream">Buttercream($7)</option>
-    <option value="Chocolate Mousse">Chocolate Mousse($12)</option>
-</select>
+    <p>
+        <input type="checkbox" id="includecandles" name="includecandles" onclick="calculateTotal()" />
+        <label for="includecandles">캔들 포함 ($5)</label>
+    </p>
 
-<p>
-    <label for='includecandles' class="inlinelabel">Include Candles($5)</label>
-    <input type="checkbox" id="includecandles" name='includecandles' onclick="calculateTotal()" />
-</p>
+    <p>
+        <input type="checkbox" id="includeinscription" name="includeinscription" onclick="calculateTotal()" />
+        <label for="includeinscription">인스크립션 포함 ($20)</label>
+        <br/>
+        <input type="text" id="theinscription" name="theinscription" value="인스크립션 입력" />
+    </p>
 
-<p>
-    <label for='include inscription' class="inlinelabel"
-
-</p>
-
-
-<p id="demo1"></p>
-<p id="demo2"></p>
+    <div id="totalPrice">총 가격: $0</div>
+</form>
 
 <script>
+    var cake_prices = {
+        "Round6": 20,
+        "Round8": 25,
+        "Round10": 35,
+        "Round12": 75
+    };
 
+    var filling_prices = {
+        "None": 0,
+        "Lemon": 5,
+        "Custard": 5,
+        "Fudge": 7,
+        "Mocha": 8,
+        "Raspberry": 10,
+        "Pineapple": 5,
+        "Dobash": 9,
+        "Mint": 5,
+        "Cherry": 5,
+        "Apricot": 8,
+        "Buttercream": 7,
+        "Chocolate Mousse": 12
+    };
+
+    function getCakeSizePrice() {
+        var cakeSize = document.getElementById("size").value;
+        return cake_prices[cakeSize] || 0;
+    }
+
+    function getFillingPrice() {
+        var filling = document.getElementById("filling").value;
+        return filling_prices[filling] || 0;
+    }
+
+    function candlesPrice() {
+        return document.getElementById("includecandles").checked ? 5 : 0;
+    }
+
+    function inscriptionPrice() {
+        return document.getElementById("includeinscription").checked ? 20 : 0;
+    }
+
+    function calculateTotal() {
+        var total = getCakeSizePrice() + getFillingPrice() + candlesPrice() + inscriptionPrice();
+        document.getElementById("totalPrice").innerHTML = "총 가격: $" + total;
+    }
+
+    // 페이지 로드 시 총 가격 초기화
+    window.onload = calculateTotal;
 </script>
 
 </body>
 </html>
-
